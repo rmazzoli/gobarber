@@ -3,13 +3,15 @@ import { startOfHour, parseISO, isBefore, format, subHours } from 'date-fns';
 import pt from 'date-fns/locale/pt-BR';
 import User from '../models/User';
 import File from '../models/File';
-import Appointement from '../models/Appointment';
+import Appointment from '../models/Appointment';
 import Notication from '../schemas/Notification';
+
+import Mail from '../../lib/Mail';
 
 class AppointmentController {
   async index(req, res) {
     const { page = 1 } = req.query;
-    const appointment = await Appointement.findAll({
+    const appointment = await Appointment.findAll({
       where: { user_id: req.userId, canceled_at: null },
       order: ['date'],
       limit: 20,
@@ -81,7 +83,7 @@ class AppointmentController {
     /**
      * Check date availabity
      */
-    const checkAvailabity = await Appointement.findOne({
+    const checkAvailabity = await Appointment.findOne({
       where: {
         provider_id,
         canceled_at: null,
@@ -95,7 +97,7 @@ class AppointmentController {
         .json({ error: 'Appoitement date is not available' });
     }
 
-    const appointment = await Appointement.create({
+    const appointment = await Appointment.create({
       user_id: req.userId,
       provider_id,
       date: hourStart,
@@ -123,7 +125,20 @@ class AppointmentController {
   }
 
   async delete(req, res) {
-    const appointment = await Appointement.findByPk(req.params.id);
+    const appointment = await Appointment.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          as: 'provider',
+          attributes: ['name', 'email'],
+        },
+        {
+          model: User,
+          as: 'user',
+          attributes: ['name'],
+        },
+      ],
+    });
 
     if (appointment.user_id !== req.userId) {
       return res.status(401).json({
@@ -142,6 +157,20 @@ class AppointmentController {
     appointment.canceled_at = new Date();
 
     await appointment.save();
+
+    Mail.sendMail({
+      from: 'Equipe GoBarber <noreply@gobarber.com>',
+      to: `${appointment.provider.name} <${appointment.provider.email}>`,
+      subject: 'Agendamento cancelado',
+      template: 'cancelation',
+      context: {
+        provider: appointment.provider.name,
+        user: appointment.user.name,
+        date: format(appointment.date, "'dia' dd 'de' MMMM', às' H:mm'h'", {
+          locale: pt,
+        }),
+      },
+    });
 
     return res.json(appointment);
   }
