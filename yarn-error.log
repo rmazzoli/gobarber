@@ -1,5 +1,5 @@
 Arguments: 
-  /home/rmazzoli/.nvm/versions/node/v10.16.3/bin/node /usr/share/yarn/bin/yarn.js add express-async-errors
+  /home/rmazzoli/.nvm/versions/node/v10.16.3/bin/node /usr/share/yarn/bin/yarn.js add dotenv
 
 PATH: 
   /home/rmazzoli/.nvm/versions/node/v10.16.3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
@@ -34,6 +34,7 @@ npm manifest:
       "bee-queue": "^1.2.2",
       "date-fns": "^2.0.0-beta.5",
       "express": "^4.17.1",
+      "express-async-errors": "^3.1.1",
       "express-handlebars": "^3.1.0",
       "jsonwebtoken": "^8.5.1",
       "mongoose": "^5.7.5",
@@ -43,6 +44,7 @@ npm manifest:
       "pg": "^7.12.1",
       "pg-hstore": "^2.3.3",
       "sequelize": "^5.19.6",
+      "youch": "^2.0.10",
       "yup": "^0.27.0"
     },
     "devDependencies": {
@@ -1241,6 +1243,11 @@ Lockfile:
       regex-not "^1.0.0"
       snapdragon "^0.8.1"
       to-regex "^3.0.1"
+  
+  express-async-errors@^3.1.1:
+    version "3.1.1"
+    resolved "https://registry.yarnpkg.com/express-async-errors/-/express-async-errors-3.1.1.tgz#6053236d61d21ddef4892d6bd1d736889fc9da41"
+    integrity sha512-h6aK1da4tpqWSbyCa3FxB/V6Ehd4EEB15zyQq9qe75OZBp0krinNKuH4rAY+S/U/2I36vdLAUFSjQJ+TFmODng==
   
   express-handlebars@^3.0.0, express-handlebars@^3.1.0:
     version "3.1.0"
@@ -2442,6 +2449,11 @@ Lockfile:
       type-is "^1.6.4"
       xtend "^4.0.0"
   
+  mustache@^3.0.0:
+    version "3.1.0"
+    resolved "https://registry.yarnpkg.com/mustache/-/mustache-3.1.0.tgz#9fba26e7aefc5709f07ff585abb7e0abced6c372"
+    integrity sha512-3Bxq1R5LBZp7fbFPZzFe5WN4s0q3+gxZaZuZVY+QctYJiCiVgXHOTIC0/HgZuOPFt/6BQcx5u0H2CUOxT/RoGQ==
+  
   mute-stream@0.0.7:
     version "0.0.7"
     resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
@@ -3604,6 +3616,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.0.3.tgz#04e6926f662895354f3dd015203633b857297e2c"
     integrity sha1-BOaSb2YolTVPPdAVIDYzuFcpfiw=
   
+  stack-trace@0.0.10:
+    version "0.0.10"
+    resolved "https://registry.yarnpkg.com/stack-trace/-/stack-trace-0.0.10.tgz#547c70b347e8d32b4e108ea1a2a159e5fdde19c0"
+    integrity sha1-VHxws0fo0ytOEI6hoqFZ5f3eGcA=
+  
   static-extend@^0.1.1:
     version "0.1.2"
     resolved "https://registry.yarnpkg.com/static-extend/-/static-extend-0.1.2.tgz#60809c39cbff55337226fd5e0b520f341f1fb5c6"
@@ -4162,6 +4179,15 @@ Lockfile:
       which-module "^2.0.0"
       y18n "^4.0.0"
       yargs-parser "^13.1.1"
+  
+  youch@^2.0.10:
+    version "2.0.10"
+    resolved "https://registry.yarnpkg.com/youch/-/youch-2.0.10.tgz#e0f6312b12304fd330a0c4a0e0925b0123f7d495"
+    integrity sha512-qPLQW2TuwlcK9sm5i1Gbb9ezRZRZyzr6NsY5cqxsbh+2iEyKPxLlz0OSAc+pQ7mv1pYZLri1MXynggP6R2FcNQ==
+    dependencies:
+      cookie "^0.3.1"
+      mustache "^3.0.0"
+      stack-trace "0.0.10"
   
   yup@^0.27.0:
     version "0.27.0"
