@@ -22,7 +22,7 @@ class ScheduleController {
         canceled_at: null,
         date: { [Op.between]: [startOfDay(parsedDate), endOfDay(parsedDate)] },
       },
-      includer: [
+      include: [
         {
           model: User,
           as: 'user',
